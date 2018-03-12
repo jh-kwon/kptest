@@ -34,13 +34,5 @@ public class EmailValidationService {
 		
 		return rt;
 	}
-	
-	public boolean validationEmailAddressDuplicated(String src) {
-		boolean rt = false;
-		
-		//TODO check does email already used(i.e. duplicated)? -- with DB
-		
-		return rt;
-	}
 
 }

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ResponseVo implements Serializable{
 	
 	private boolean success;
+	private int ecode; // error code
 	private Object data; // responsedata
 	private PageVo page;
 //	private Map<String, Object> ext; // for extra data
@@ -21,6 +22,15 @@ public class ResponseVo implements Serializable{
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
+
+	public int getEcode() {
+		return ecode;
+	}
+
+	public void setEcode(int ecode) {
+		this.ecode = ecode;
+	}
+
 	public Object getData() {
 		return data;
 	}

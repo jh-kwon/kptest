@@ -2,6 +2,8 @@ package kwon.test.kakaopay.service;
 
 import java.math.BigInteger;
 
+import kwon.test.kakaopay.Constants;
+import kwon.test.kakaopay.exceptions.CustomException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +21,7 @@ public class CouponIssuingService {
     public String getCouponString(long no){
     		BigInteger bigNo = BigInteger.valueOf(no);
         if(bigNo.compareTo(LIMIT) >= 0){
-            throw new RuntimeException(" Can't Issue New Coupon -  Overflow limit");
+            throw new CustomException(Constants.ErrorCode.E_OVER_LIMIT_COUPON, "Can't Issue New Coupon -  Overflow limit");
         }
 
         StringBuffer rtSb = new StringBuffer();
