@@ -27,14 +27,9 @@ $( document ).ready(function() {
       data : JSON.stringify(formData),
       dataType : 'json',
       success : function(response) {
-    	  
-    	  	//-- debug START
-    	  	console.log("response: ",response);
-//    	  	var typeR = (typeof response);
-//    	  	console.log("result type: ", typeR)
-    	  	//-- debug END
-    	  	
-    	  	
+
+    	  	console.log("response: ",JSON.stringify(response)); // debug
+
     	  	if(response.success == true){
     	  		hideSubmitButton();
     	  		loadRegistResult(response);
@@ -48,7 +43,7 @@ $( document ).ready(function() {
     	  	}
       },
       error : function(e) {
-    	  	alert("Error!") // debug --TODO remove
+    	alert("Regist Email Request Error!") // debug --TODO remove
         console.log("ERROR: ", e); // debug
       }
     });

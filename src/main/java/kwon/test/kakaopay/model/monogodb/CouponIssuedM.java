@@ -10,6 +10,7 @@ public class CouponIssuedM extends MongoVo{
     private long useq;
     private String email;
     private String coupon;
+    private long ct; //create(insert) time
 
     public long getUseq() {
         return useq;
@@ -33,5 +34,13 @@ public class CouponIssuedM extends MongoVo{
 
     public void setCoupon(String coupon) {
         this.coupon = coupon;
+    }
+
+    public long getCt() {
+        return ct;
+    }
+
+    public void setCt(long ct) {
+        this.ct = ct;
     }
 }

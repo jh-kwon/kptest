@@ -14,6 +14,7 @@ public class Constants {
     public interface MongoDBField{
         public static final String _id = "_id";
         public static final String seq = "seq";
+        public static final String useq = "useq";
         public static final String email = "email";
         public static final String coupon = "coupon";
 
@@ -23,6 +24,13 @@ public class Constants {
         public static final int E_SERVER = 1;
 
         public static final int E_INVALID_EMAIL = 101;
-        public static final int E_OVER_LIMIT_COUPON = 102;
+        public static final int E_FAIL_GET_SEQ = 102;
+        public static final int E_OVER_LIMIT_COUPON = 103;
+    }
+
+    public interface Pagination{
+        // row cnt per one request
+        public static final int DEFAULT_ROW_CNT = 100;
+        public static final int MAX_ROW_CNT = 500;
     }
 }

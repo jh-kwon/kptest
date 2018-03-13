@@ -8,7 +8,7 @@ var table = 	$('#clistTable').DataTable( {
     "searching": false,
     
     "columns": [
-        { "data": "no" },
+        { "data": "seq" },
         { "data": "email" },
         { "data": "coupon" },
         { "data": "date" }
@@ -28,44 +28,43 @@ function requestCouponList(rowno, rowcnt){
 	if(rowNoFromServer >= 0){
 		  // PREPARE FORM DATA
 		  var formData = {
-				  rowno : rowno,
-				  rowcnt : rowcnt
+		    page:{
+		        rowno : rowno,
+		        rowcnt : rowcnt
+		    }
 		  };
 		  console.log("formData: ",formData); // debug
 		  
 		  var pageReset = (rowno == 0);
 		  
-		  testLoadTableWithoutServer(rowcnt, pageReset);//-- ONLY TEST CLIENT
+//		  testLoadTableWithoutServer(rowcnt, pageReset);//-- ONLY TEST CLIENT
 		  
 		  // DO POST
-		//  $.ajax({
-		//  type : "POST",
-		//  contentType : "application/json",
-		//  url : url + "couponlist",
-		//  data : JSON.stringify(formData),
-		//  dataType : 'json',
-		//  success : function(response) {
-//			  
-//			  	//-- debug START
-//			  	console.log("response: ",response);
-//			  	var typeR = (typeof response);
-//			  	console.log("result type: ", typeR)
-//			  	//-- debug END
-//			  	
-//			  	if(response.success == true){
-//			  		rowNoFromServer = response.page.rowno;
-//			  		loadCouponListTable(response.data, pageReset);
-//			  	}else{
+		  $.ajax({
+		  type : "POST",
+		  contentType : "application/json",
+		  url : url + "couponlist/issued",
+		  data : JSON.stringify(formData),
+		  dataType : 'json',
+		  success : function(response) {
+
+			  	console.log("222_response: ",JSON.stringify(response)); // debug
+
+			  	if(response.success == true){
+			  		rowNoFromServer = response.page.rowno;
+			  		loadCouponListTable(response.data, pageReset);
+			  	}else{
+			  	    alert("Error : Fail to load list")
 //			  		$("#registResultDiv").html("<div class='alert alert-danger' role='alert'> Error : Fail to load list </div>");
-//			  	}
-		//  },
-		//  error : function(e) {
-//			  	alert("Error!") // debug --TODO remove
-//		    console.log("ERROR: ", e); // debug
-		//  }
-		//});
+			  	}
+		  },
+		  error : function(e) {
+		    alert("Load Table Request Error!") // debug --TODO remove
+		    console.log("ERROR: ", e); // debug
+		  }
+		});
 	}else{ // this means, there is more data on server
-		alert("No more data!!")
+		alert("No more data for presenting table!!")
 	}
 }
 
@@ -78,9 +77,30 @@ function loadCouponListTable(list, pageReset){
 	console.log(" data len:"+table.data().length+" >> add list len:"+ list.length);
 	
 	if(list.length > 0){
-		table.rows.add(list).draw(pageReset);
+	    for(var i = 0;i < list.length;i++){
+	        var element = list[i];
+
+	        element.date = convertTimeToformattedDateString(element.date);
+	        table.row.add(element);
+	    }
+	    table.draw(pageReset);
+//		table.rows.add(list).draw(pageReset);
 	}
   }
+
+function convertTimeToformattedDateString(time){
+    var newDate = new Date(time);
+
+    var month = (newDate.getMonth()+1);
+    if(10 > month){
+        month = "0"+month;
+    }
+
+    var formatted = newDate.getFullYear()+ "-" + month+"-"+newDate.getDate()
+                +" "+newDate.getHours()+":"+ newDate.getMinutes() + ":" + newDate.getSeconds();
+
+    return formatted;
+}
 
 //check is last page and load more pages....
 var chkIsLastPageAndLoadMorePagesFunc = function () {
@@ -104,7 +124,7 @@ function testLoadTableWithoutServer(rowcnt, pageReset){
 	  for(var i = 0;i < rowcnt;i++){
 		  var idx = totalRowCnt+i;
 		  var testData = {
-				  "no":idx,
+				  "seq":idx,
 				  "email":idx+"@a.com",
 				  "coupon":"coupon_"+idx,
 				  "date" : "2018-MM-dd HH:mm:ss"

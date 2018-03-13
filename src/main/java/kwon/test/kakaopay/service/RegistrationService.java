@@ -2,7 +2,7 @@ package kwon.test.kakaopay.service;
 
 import kwon.test.kakaopay.Constants;
 import kwon.test.kakaopay.exceptions.CustomException;
-import kwon.test.kakaopay.model.ResponseVo;
+import kwon.test.kakaopay.model.RequestParamVo;
 import kwon.test.kakaopay.model.monogodb.CouponIssuedM;
 import kwon.test.kakaopay.util.MathUtil;
 import org.slf4j.Logger;
@@ -29,10 +29,12 @@ public class RegistrationService {
 
 
 
-    public String registEmailAndIssueCoupon(String email){
+    public String registEmailAndIssueCoupon(RequestParamVo param){
         String coupon = null;
 
         try{
+            String email = param.getEmail();
+
             // 1. validating email address
             if(!emailValidationService.validateEmailAddressForm(email)) {
                 LOGGER.debug("Invalid Email:{}", email);
@@ -45,6 +47,7 @@ public class RegistrationService {
             long useq = this.sequenceDelegator.getUserSequence();
 
             CouponIssuedM registM = new CouponIssuedM();
+            registM.setCt(param.getTxtime());
             registM.setUseq(useq);
             registM.setEmail(email);
 

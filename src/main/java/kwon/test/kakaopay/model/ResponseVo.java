@@ -1,13 +1,7 @@
 package kwon.test.kakaopay.model;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
-public class ResponseVo implements Serializable{
+public class ResponseVo extends RootVo {
 	
 	private boolean success;
 	private int ecode; // error code

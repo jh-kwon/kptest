@@ -36,12 +36,18 @@ public class MongoConfig {
         // initialize User Sequence
         SequenceCounterM seqM = new SequenceCounterM();
         seqM.setId(Constants.SequenceKey.USER_SEQ);
-        seqM.setSeq(0);
+        seqM.setSeq(0); // TODO make random start seq for Test
         mongoTemplate.insert(seqM, Constants.MongoDB.SEQ_COUNTER_M);
 
         try{
-            // make index
+            // Make indexes
+            // : If I'm in real world, then I'll make unique index for {email:1, coupon:1}
+            //   but in this enviroment which use Embedded MongoDB,
+            //   shoul create index every application start-up
+            //   by Spring data's MongoTemplate(only support creating one field index).
+            //   So, I just create unique index for email
             mongoTemplate.indexOps(Constants.MongoDB.COUPON_ISSUED_M).ensureIndex(new Index().on(Constants.MongoDBField.email, Sort.Direction.ASC).unique());
+            mongoTemplate.indexOps(Constants.MongoDB.COUPON_ISSUED_M).ensureIndex(new Index().on(Constants.MongoDBField.seq, Sort.Direction.ASC));
         }catch (Exception e){
             e.printStackTrace();
         }

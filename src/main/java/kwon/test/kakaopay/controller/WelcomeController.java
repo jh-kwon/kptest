@@ -1,5 +1,6 @@
 package kwon.test.kakaopay.controller;
 
+import kwon.test.kakaopay.Constants;
 import kwon.test.kakaopay.exceptions.CustomException;
 import kwon.test.kakaopay.model.RequestParamVo;
 import kwon.test.kakaopay.model.ResponseVo;
@@ -35,13 +36,16 @@ public class WelcomeController {
         ResponseVo res =  new ResponseVo();
 
         try{
-            String coupon = this.registrationService.registEmailAndIssueCoupon(param.getEmail());
+            String coupon = this.registrationService.registEmailAndIssueCoupon(param);
             if(!StringUtil.isEmpty(coupon)){
                 res.setSuccess(true);
                 res.setData(coupon);
             }
         }catch (Exception e){
+            e.printStackTrace();
+
             res.setSuccess(false);
+            res.setEcode(Constants.ErrorCode.E_SERVER);
 
             if(e instanceof CustomException){
                 CustomException ce = (CustomException)e;

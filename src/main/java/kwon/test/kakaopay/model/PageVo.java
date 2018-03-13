@@ -1,8 +1,6 @@
 package kwon.test.kakaopay.model;
 
-import java.io.Serializable;
-
-public class PageVo implements Serializable{
+public class PageVo extends RootVo {
 	private long rowno;
 	private int rowcnt;
 	

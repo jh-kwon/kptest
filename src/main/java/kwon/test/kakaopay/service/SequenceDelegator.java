@@ -1,6 +1,7 @@
 package kwon.test.kakaopay.service;
 
 import kwon.test.kakaopay.Constants;
+import kwon.test.kakaopay.exceptions.CustomException;
 import kwon.test.kakaopay.model.monogodb.SequenceCounterM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,13 +30,9 @@ public class SequenceDelegator {
         FindAndModifyOptions opts = new FindAndModifyOptions();
         opts.returnNew(true);
 
-        SequenceCounterM newSeq = null;
-//        synchronized(this){
-            newSeq = this.mongoTemplate.findAndModify(query(where(Constants.MongoDBField._id).is(key)), update, opts, SequenceCounterM.class, Constants.MongoDB.SEQ_COUNTER_M);
-//        }
-
+        SequenceCounterM newSeq = this.mongoTemplate.findAndModify(query(where(Constants.MongoDBField._id).is(key)), update, opts, SequenceCounterM.class, Constants.MongoDB.SEQ_COUNTER_M);
         if(newSeq == null){
-            throw new RuntimeException("FAIL TO GET SEQUENCE");
+            throw new CustomException(Constants.ErrorCode.E_FAIL_GET_SEQ, "FAIL TO GET SEQUENCE");
         }
 
         return newSeq.getSeq();
