@@ -18,7 +18,7 @@ public class EmailValidationService {
      *  3-2) before last of dot(.), only allow alphabet, digit(number) and .-_, BUT can only start with alphabet or digit
      *  3-3) after last of dot(.), only allow alphabet & length is greater than 2 and less than 10
      */
-	private static final String emailRegex ="(?:[a-z0-9]+(?:[a-z0-9!#$%*+=~._-]+)*)@(?:[a-z0-9A-Z](?:[a-z0-9A-Z_-]*[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,10}";
+	private static final String emailRegex ="(?:[a-z0-9A-Z]+(?:[a-z0-9A-Z!#$%*+=~._-]+)*)@(?:[a-z0-9A-Z](?:[a-z0-9A-Z_-]*[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,10}";
 	private static final Pattern emailRegexPattern = Pattern.compile(emailRegex);
 	public boolean validateEmailAddressForm(String src) {
 		boolean rt = false;
