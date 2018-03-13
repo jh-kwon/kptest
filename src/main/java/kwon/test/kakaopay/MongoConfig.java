@@ -3,6 +3,7 @@ package kwon.test.kakaopay;
 import com.mongodb.MongoClient;
 import cz.jirutka.spring.embedmongo.EmbeddedMongoFactoryBean;
 import kwon.test.kakaopay.model.monogodb.SequenceCounterM;
+import kwon.test.kakaopay.util.MathUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
@@ -36,7 +37,9 @@ public class MongoConfig {
         // initialize User Sequence
         SequenceCounterM seqM = new SequenceCounterM();
         seqM.setId(Constants.SequenceKey.USER_SEQ);
-        seqM.setSeq(0); // TODO make random start seq for Test
+        seqM.setSeq(0);
+//        seqM.setSeq(MathUtil.generatingRandomLongBounded(0, Long.MAX_VALUE)); // make random start seq for Test
+
         mongoTemplate.insert(seqM, Constants.MongoDB.SEQ_COUNTER_M);
 
         try{
