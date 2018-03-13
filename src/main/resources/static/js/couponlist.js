@@ -91,15 +91,22 @@ function loadCouponListTable(list, pageReset){
 function convertTimeToformattedDateString(time){
     var newDate = new Date(time);
 
-    var month = (newDate.getMonth()+1);
-    if(10 > month){
-        month = "0"+month;
-    }
-
-    var formatted = newDate.getFullYear()+ "-" + month+"-"+newDate.getDate()
-                +" "+newDate.getHours()+":"+ newDate.getMinutes() + ":" + newDate.getSeconds();
+    var formatted = newDate.getFullYear()
+                +"-"+convertTo2digitString(newDate.getMonth()+1)
+                +"-"+convertTo2digitString(newDate.getDate())
+                +" "+convertTo2digitString(newDate.getHours())
+                +":"+convertTo2digitString(newDate.getMinutes())
+                +":"+convertTo2digitString(newDate.getSeconds());
 
     return formatted;
+}
+
+function convertTo2digitString(src){
+    if(10 > src){
+        src = "0"+src;
+    }
+
+    return src;
 }
 
 //check is last page and load more pages....
