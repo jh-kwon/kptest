@@ -18,10 +18,14 @@ public class CouponIssuingService {
     public static final int LENGTH_OF_RESULT = 16;
     public static final BigInteger LIMIT =  BigInteger.valueOf(RANGE_CNT).pow(LENGTH_OF_RESULT);
 
+    public BigInteger getLimit(){
+        return LIMIT;
+    }
+
     public String getCouponString(long no){
-    		BigInteger bigNo = BigInteger.valueOf(no);
-        if(bigNo.compareTo(LIMIT) >= 0){
-            throw new CustomException(Constants.ErrorCode.E_OVER_LIMIT_COUPON, "Can't Issue New Coupon -  Overflow limit");
+        BigInteger bigNo = BigInteger.valueOf(no-1);
+        if( 0 > bigNo.compareTo(BigInteger.ZERO) || bigNo.compareTo(LIMIT) >= 0){
+            throw new CustomException(Constants.ErrorCode.E_OUT_OF_RANGE_OF_COUPON, "Can't Issue New Coupon : Out of range!");
         }
 
         StringBuffer rtSb = new StringBuffer();

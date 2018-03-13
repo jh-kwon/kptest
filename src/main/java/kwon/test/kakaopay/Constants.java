@@ -25,7 +25,7 @@ public class Constants {
 
         public static final int E_INVALID_EMAIL = 101;
         public static final int E_FAIL_GET_SEQ = 102;
-        public static final int E_OVER_LIMIT_COUPON = 103;
+        public static final int E_OUT_OF_RANGE_OF_COUPON = 103;
     }
 
     public interface Pagination{
