@@ -17,7 +17,7 @@ public class RootTest {
 
 
     protected String convertRequestParamTojson(RequestParamVo requestParamVo) throws Exception{
-        String json = mapper.writer().writeValueAsString(requestParamVo);
+        String json = mapper.writeValueAsString(requestParamVo);
         System.out.println("param to Json:<<"+json+">>");
 
         return json;
