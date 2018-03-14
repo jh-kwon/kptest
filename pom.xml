@@ -24,6 +24,20 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<!-- for WebTestClient (1) START -->
+	<!--<dependencyManagement>-->
+		<!--<dependencies>-->
+			<!--<dependency>-->
+				<!--<groupId>io.projectreactor</groupId>-->
+				<!--<artifactId>reactor-bom</artifactId>-->
+				<!--<version>Bismuth-RELEASE</version>-->
+				<!--<type>pom</type>-->
+				<!--<scope>import</scope>-->
+			<!--</dependency>-->
+		<!--</dependencies>-->
+	<!--</dependencyManagement>-->
+	<!-- for WebTestClient (2) END -->
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -43,6 +57,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- for WebTestClient (2) START -->
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-webflux</artifactId>-->
+		<!--</dependency>-->
+
+		<!--<dependency>-->
+			<!--<groupId>io.projectreactor</groupId>-->
+			<!--<artifactId>reactor-core</artifactId>-->
+		<!--</dependency>-->
+		<!-- for WebTestClient (2) END -->
 		
 		<!-- Embedded MongoDB -->
 		<dependency>
