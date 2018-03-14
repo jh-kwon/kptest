@@ -1,6 +1,6 @@
 
 # 환경 정보
-- Spring Boot+ Java 8 기반으로 작성
+- Spring Boot 4.0 + Java 8 기반으로 작성
 - 저장소는 MongoDB 사용
    - 단, 테스트 목적이므로 사용이 간단한 Embedded MongoDB(in-memory DB)를 사용
 - 클라이언트 역할의 front end는 thymeleaf 프레임워크 기반에 jquery + bootstrap으로 작성
@@ -58,6 +58,52 @@ Spring Boot를 개발할 때 일반적으로 많이 사용되는 STS와 IntelliJ
 ```
 http://localhost:8080/
 ```
+
+## 테스트 케이스
+유닛 테스트와 통합 테스트를 위한 테스트 케이스를 Spring Boot에서 제공하는 테스트 유틸리티를 이용해 작성했으며
+IDE(STS, IntelliJ)에서 JUnit 플러그인을 통해 실행 가능함.
+
+## 유닛 테스트
+메소드 호출을 통한 단위 기능 확인을 위한 테스트 케이스는 아래의 경로에 있음.
+
+```
+test/java/kwon.test.kakaopay/feature
+```
+
+## 통합 테스트 (REST API호출)
+REST API호출을 통한 리퀘스트 처리와 그 결과 응답의 확인과 서버를 실행했을 때 실제 동작을 확인 가능한 통합 테스트는 아래의 경로에 있음.
+
+```
+- test/java/kwon.test.kakaopay/integration
+    - webmvctest
+    - withserver
+        - testresttemplate
+        - webtestclient
+```
+
+### 서버 기동 없이 가능한 테스트
+#### WebMvcTest를 이용한 테스트 케이스
+- 위의 디렉토리 중 webmvctest 하위에 있는 테스트케이스로, Spring Boot를 통해 자동 구성되는 Spring MVC의 동작이 의도대로 확인 하기 위해 사용
+- full server의 배포없이 로컬 환경에서도 빠르고 간단하게 REST API동작 확인이 가능
+- 클라이언트 입장보다는 서버가 정상적으로 동작하는지에 대한 확인에 적합
+
+
+### 동작 중인 서버와의 테스트
+- 아래의 방법들을 이용하면 서버 기동 없이도 테스트가 가능하지만 동작중인 서버에 연결해 테스트 하는 것도 가능
+- 단, 어떤 경우든 테스트 환경 구성을 위해 내부적으로 Embedded Server를 로딩하기 때문에 실행까지 오래 걸림
+- 서버의 동작 확인뿐 아니라 클라이언트 단에서 서버에 요청을 했을 경우의 전체 과정에 대한 확인이 가능
+
+#### TestRestTemplate를 이용한 테스트 케이스
+- 내부적으로 Aphache HTTP Client 이용, 직접 HTTP Client를 통해 통신상의 여러가지 다양한 설정이 가능
+- 그러나 @SpringBootTest를 이용해 간단히 기본 설정이 완료된 상태에서도 테스트 가능
+- 기본적인 test starter(spring-boot-starter-test)로 추가된 라이브러리만을 이용해 이용 가능
+
+#### WebTestClient를 이용한 테스트 케이스
+- 다양한 assertion등을 지원 해주는 등 좀 더 효과적이고 다양한 시나리오의 테스트가 가능
+- 단, 이 방법을 이용하기 위해서는 기본적인 test starter(spring-boot-starter-test)외에도 라이브러리 디펜더시가 추가도 필요
+- 해당 프로젝트에는 기본 테스트 유틸리티에서 제공하는 응답값 검증 모듈만으로 충분하다고 판단, 테스트만을 위해 추가적인 디펜더시 추가를 하고 싶지 않아 전체 주석처리 되어 있음
+
+
 
 # 특이 사항
 1. 프로세스와 동일한 메모리에 부팅되는 in-memory DB를 사용함에 따라
