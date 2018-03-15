@@ -1,5 +1,10 @@
 var rowCntOfTablePerOneCall = 100;
 
+function convertFormattedCoupon(coupon){
+    return coupon.slice(0,4)+"-"+coupon.slice(4,8)+"-"+coupon.slice(8,12)+"-"+coupon.slice(12,16)
+}
+
+
 $( document ).ready(function() {
 	var url = window.location;
 	
@@ -60,7 +65,7 @@ $( document ).ready(function() {
   		}
   		
   		// for presenting coupon
-  		$("#registResultDiv").html("<div class='alert alert-info' role='alert'>" +"Your Coupon No.: " + coupon + "</div>");
+  		$("#registResultDiv").html("<div class='alert alert-info' role='alert'>" +"Your Coupon No.: " + convertFormattedCoupon(coupon) + "</div>");
     	
         //load another .js to do server request & load table
   		$.getScript('js/couponlist.js')

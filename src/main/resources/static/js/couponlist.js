@@ -90,9 +90,9 @@ function loadCouponListTable(list, pageReset){
 	}
   }
 
-function convertFormattedCoupon(coupon){
-    return coupon.slice(0,4)+"-"+coupon.slice(4,8)+"-"+coupon.slice(8,12)+"-"+coupon.slice(12,16)
-}
+//function convertFormattedCoupon(coupon){
+//    return coupon.slice(0,4)+"-"+coupon.slice(4,8)+"-"+coupon.slice(8,12)+"-"+coupon.slice(12,16)
+//}
 
 
 function convertTimeToformattedDateString(time){
