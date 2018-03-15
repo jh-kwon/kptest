@@ -80,13 +80,20 @@ function loadCouponListTable(list, pageReset){
 	    for(var i = 0;i < list.length;i++){
 	        var element = list[i];
 
+	        element.coupon = convertFormattedCoupon(element.coupon);
 	        element.date = convertTimeToformattedDateString(element.date);
+
 	        table.row.add(element);
 	    }
 	    table.draw(pageReset);
 //		table.rows.add(list).draw(pageReset);
 	}
   }
+
+function convertFormattedCoupon(coupon){
+    return coupon.slice(0,4)+"-"+coupon.slice(4,8)+"-"+coupon.slice(8,12)+"-"+coupon.slice(12,16)
+}
+
 
 function convertTimeToformattedDateString(time){
     var newDate = new Date(time);
@@ -134,7 +141,7 @@ function testLoadTableWithoutServer(rowcnt, pageReset){
 				  "seq":idx,
 				  "email":idx+"@a.com",
 				  "coupon":"coupon_"+idx,
-				  "date" : "2018-MM-dd HH:mm:ss"
+				  "date" : 1521045448000
 		  };
 		  testArray.push(testData);
 		  rowNoFromServer = idx+1;
