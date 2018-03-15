@@ -72,8 +72,10 @@ IDE(STS, IntelliJ)에서 JUnit 플러그인을 통해 실행 가능함.
 메소드 호출을 통한 단위 기능 확인을 위한 테스트 케이스는 아래의 경로에 있음.
 
 ```
-test/java/kwon.test.kakaopay/feature
+- test/java/kwon.test.kakaopay/feature
 ```
+- EmailValidationTest.java :  이메일 유효성 체크 로직 테스트
+- IssueCouponTest.java :  쿠폰번호 생성 로직 테스트
 
 ### 통합 테스트 (REST API호출)
 REST API호출을 통한 리퀘스트 처리와 그 결과 응답의 확인과 서버를 실행했을 때 실제 동작을 확인 가능한 통합 테스트는 아래의 경로에 있음.
@@ -85,6 +87,12 @@ REST API호출을 통한 리퀘스트 처리와 그 결과 응답의 확인과 �
         - testresttemplate
         - webtestclient
 ```
+위의 패키지 하위에 있는 *RegistrationTest.java에서는 아래와 같은 시나리오의 테스트가 작성되어 있다.
+1. 특정 이메일로 쿠폰 발급 요청 : 성공 기대
+2. 1에서 사용한 이메일로 재요청 : 실패 기대
+3. 쿠폰리스트 요청하여 목록 내용에 1에서 등록한 이메일과 1의 결과값으로 받은 쿠폰이 포함되는지 확인 : 성공 기대
+
+
 
 #### 서버 기동 없이 가능한 테스트
 ##### WebMvcTest를 이용한 테스트 케이스
