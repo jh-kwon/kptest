@@ -8,6 +8,7 @@
 - 클라이언트 역할의 front end는 thymeleaf 프레임워크 기반에 jquery + bootstrap으로 작성
   - 쿠폰 리스트를 표시하기 위해서는 jquery의 plugin인 DataTables를 사용함
     - https://datatables.net/
+- 서버는 REST API를 제공하여 클라이언트와 JSON Object 통신을 하게됨
 
 
 
