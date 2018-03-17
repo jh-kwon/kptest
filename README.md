@@ -2,7 +2,7 @@
 쿠폰 발급 시스템 구축
 
 # 환경 정보
-- Spring Boot 4.0 + Java 8 기반으로 작성
+- Spring Boot 2.0 + Java 8 기반으로 작성
 - 저장소는 MongoDB 사용
    - 단, 테스트 목적이므로 사용이 간단한 Embedded MongoDB(in-memory DB)를 사용
 - 클라이언트 역할의 front end는 thymeleaf 프레임워크 기반에 jquery + bootstrap으로 작성
